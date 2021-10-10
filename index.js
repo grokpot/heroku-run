@@ -23,14 +23,11 @@ try {
   execSync(createCatFile(heroku))
   console.log('Created and wrote to ~./netrc')
 
-  execSync('heroku login')
-  console.log('Successfully logged into heroku')
-
-  execSync(`heroku run -a ${heroku.app_name} -- ${command}`)
+  execSync(`heroku ${command} -a ${heroku.app_name}`)
 
   core.setOutput(
     'status',
-    `Successfully ran command ${command} in ${heroku.app_name}`,
+    `Successfully ran command 'heroku ${command}' in ${heroku.app_name}`,
   )
 } catch (err) {
   core.setFailed(err.toString())
